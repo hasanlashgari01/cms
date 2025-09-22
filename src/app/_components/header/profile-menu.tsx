@@ -6,7 +6,7 @@ import Avatar from "../avatar/avatar";
 import MenuItem from "./menu-item";
 
 const ProfileMenu = () => {
-  const { isLoading, user, logout } = useAuthentication();
+  const { isLoading, isLoggedIn, user, logout } = useAuthentication();
   const [isShowPopup, setIsShowPopup] = useState(false);
 
   const togglePopupHandler = () => setIsShowPopup((prev) => !prev);
@@ -35,26 +35,28 @@ const ProfileMenu = () => {
           full_name={user?.full_name || "داشبورد"}
           onClick={togglePopupHandler}
         />
-        <div
-          className={cn(
-            "text-primary dark:bg-secondary-600 invisible absolute top-full left-0 w-80 rounded-4xl bg-white opacity-0 shadow-2xl transition-all dark:shadow-none",
-            {
-              "visible translate-y-5 opacity-100": isShowPopup,
-            },
-          )}
-        >
-          <ul className="p-3">
-            <MenuItem
-              icon={UserIcon}
-              text={user?.full_name || "داشبورد"}
-              href={user?.role === "user" ? "/dashboard" : "/admin"}
-              onClick={() => {
-                if (isShowPopup) togglePopupHandler();
-              }}
-            />
-            <MenuItem icon={ArrowLeftStartOnRectangleIcon} text="خروج" onClick={logoutHandler} />
-          </ul>
-        </div>
+        {isLoggedIn && (
+          <div
+            className={cn(
+              "text-primary dark:bg-secondary-600 invisible absolute top-full left-0 w-80 rounded-4xl bg-white opacity-0 shadow-2xl transition-all dark:shadow-none",
+              {
+                "visible translate-y-5 opacity-100": isShowPopup,
+              },
+            )}
+          >
+            <ul className="p-3">
+              <MenuItem
+                icon={UserIcon}
+                text={user?.full_name || "داشبورد"}
+                href={user?.role === "user" ? "/dashboard" : "/admin"}
+                onClick={() => {
+                  if (isShowPopup) togglePopupHandler();
+                }}
+              />
+              <MenuItem icon={ArrowLeftStartOnRectangleIcon} text="خروج" onClick={logoutHandler} />
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );
