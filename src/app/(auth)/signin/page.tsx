@@ -6,9 +6,14 @@ import { SignInModel } from "../_types/auth.types";
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import { SignInSchema } from "../_types/auth.schema";
 import { useAuthentication } from "@/hooks/useAuthentication";
+import TextField from "@/app/_components/text-field/text-field";
 
 export default function SignInPage() {
-  const { register, handleSubmit } = useForm<SignInModel>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignInModel>({
     resolver: valibotResolver(SignInSchema),
   });
   const { signIn } = useAuthentication();
@@ -21,11 +26,18 @@ export default function SignInPage() {
     <AuthForm model="signin">
       <form className="flex flex-col" onSubmit={handleSubmit(onSubmitSignin)}>
         <div className="space-y-4">
-          <input type="email" placeholder="ایمیل" className="auth-input" {...register("email")} />
-          <input
+          <TextField
+            type="email"
+            placeholder="ایمیل"
+            className="auth-input"
+            error={errors.email?.message && "ایمیل صحیح نیست"}
+            {...register("email")}
+          />
+          <TextField
             type="password"
             placeholder="رمز عبور"
             className="auth-input"
+            error={errors.password?.message}
             {...register("password")}
           />
         </div>

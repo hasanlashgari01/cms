@@ -1,4 +1,4 @@
-import { email, pipe, string, trim, nonEmpty, minLength, maxLength, object } from "valibot";
+import { email, maxLength, minLength, nonEmpty, object, pipe, string, trim } from "valibot";
 
 const EmailSchema = pipe(string(), trim(), email(), nonEmpty());
 
