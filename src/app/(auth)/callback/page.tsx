@@ -8,13 +8,11 @@ export default function AuthCallbackPage() {
   const router = useRouter();
 
   useEffect(() => {
-    // Supabase خودش session رو توی کوکی ذخیره کرده
-    // ما فقط می‌خوایم کاربر رو به صفحه اصلی هدایت کنیم
     supabase.auth.getSession().then(({ data }) => {
       if (data.session) {
-        router.replace("/"); // یا هر صفحه‌ای که خواستی
+        router.replace("/");
       } else {
-        router.replace("/signin"); // اگه session نبود برگرد به لاگین
+        router.replace("/signin");
       }
     });
   }, [router]);

@@ -1,19 +1,12 @@
 import Image from "next/image";
 import { AvatarProps } from "./avatar.type";
-import Link from "next/link";
 
-const Avatar: React.FC<AvatarProps> = ({ isLoading = true, avatar_url, full_name, onClick }) => {
-  if (isLoading) {
-    return <div className="size-12 animate-pulse rounded-full bg-gray-200 dark:bg-gray-600"></div>;
-  }
-
+const Avatar: React.FC<AvatarProps> = ({ avatar_url, full_name, onClick }) => {
   return (
     <div className="size-12 overflow-hidden rounded-full">
       {!avatar_url ? (
         <div className="inset-0 z-10 size-full rounded-full bg-white">
-          <Link href="/signin">
-            <Image src="/default.jpg" alt="" width={48} height={48} />
-          </Link>
+          <Image src="/default.jpg" alt="" width={48} height={48} />
         </div>
       ) : (
         <Image
