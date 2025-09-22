@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --color-white: oklch(1 0 0 / 1);
+  --color-gray: oklch(0.86 0 0);
+  --color-background: oklch(0.98 0 264.54 / 1);
+  --color-foreground: oklch(0.21 0.03 267.87 / 1);
+
+  --color-primary-100: oklch(0.92 0.04 262.14 / 1);
+  --color-primary-200: oklch(0.83 0.08 264 / 1);
+  --color-primary-300: oklch(0.74 0.12 265.5 / 1);
+  --color-primary-400: oklch(0.66 0.16 265.88 / 1);
+  --color-primary-500: oklch(0.55 0.21 265.45 / 1);
+  --color-primary-600: oklch(0.47 0.2 265.96 / 1);
+  --color-primary-700: oklch(0.4 0.18 266.2 / 1);
+  --color-primary-800: oklch(0.33 0.16 266.43 / 1);
+  --color-primary-900: oklch(0.28 0.15 266.67 / 1);
+
+  --color-secondary-100: oklch(0.93 0.02 253.34 / 1);
+  --color-secondary-200: oklch(0.86 0.03 253.73 / 1);
+  --color-secondary-300: oklch(0.71 0.05 257.97 / 1);
+  --color-secondary-400: oklch(0.51 0.04 261.95 / 1);
+  --color-secondary-500: oklch(0.24 0.02 263.95 / 1);
+  --color-secondary-600: oklch(0.21 0.03 267.87 / 1);
+  --color-secondary-700: oklch(0.18 0.03 267.56 / 1);
+  --color-secondary-800: oklch(0.16 0.03 269.55 / 1);
+  --color-secondary-900: oklch(0.14 0.03 265.47 / 1);
+
+  --color-tertiary: oklch(0.58 0 0);
+  --color-tertiary-100: oklch(0.97 0 264.54 / 1);
+
+  --chart-title-color: oklch(0.5 0.03 269.55);
+  --chart-label-color: var(--color-secondary-300);
+  --chart-bg-color: var(--color-background);
+  --chart-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.dark:root {
+  --color-background: oklch(0.16 0.03 269.55);
+  --color-foreground: oklch(0.98 0 264.54);
+  --chart-bg-color: var(--color-background);
+  --chart-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+@theme inline {
+  --color-white: var(--color-white);
+  --color-gray: var(--color-gray);
+  --color-background: var(--color-background);
+  --color-foreground: var(--color-foreground);
+  --color-primary-500: var(--color-primary-500);
+  --color-secondary-300: var(--color-secondary-300);
+  --color-tertiary-100: var(--color-tertiary-100);
+
+  --color-primary-100: var(--color-primary-100);
+  --color-primary-200: var(--color-primary-200);
+  --color-primary-300: var(--color-primary-300);
+  --color-primary-400: var(--color-primary-400);
+  --color-primary-500: var(--color-primary-500);
+  --color-primary-600: var(--color-primary-600);
+  --color-primary-700: var(--color-primary-700);
+  --color-primary-800: var(--color-primary-800);
+  --color-primary-900: var(--color-primary-900);
+
+  --color-secondary-100: var(--color-secondary-100);
+  --color-secondary-200: var(--color-secondary-200);
+  --color-secondary-300: var(--color-secondary-300);
+  --color-secondary-400: var(--color-secondary-400);
+  --color-secondary-500: var(--color-secondary-500);
+  --color-secondary-600: var(--color-secondary-600);
+  --color-secondary-700: var(--color-secondary-700);
+  --color-secondary-800: var(--color-secondary-800);
+  --color-secondary-900: var(--color-secondary-900);
+
+  --color-tertiary-100: var(--color-tertiary-100);
+
+  --font-vazir: var(--font-vazir);
+
+  --breakpoint-xs: 480px;
+}
+
+html {
+  direction: rtl;
+}
+
+body {
+  @apply bg-background text-foreground;
+  font-family: var(--font-vazir);
+}
+
+body,
+button,
+.interactive {
+  @apply transition-colors duration-200 ease-in-out;
+}
+
+@layer utilities {
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  .auth-input {
+    @apply w-full rounded-lg outline-hidden;
+    @apply px-7 py-3.5;
+    @apply placeholder:text-secondary-300 dark:bg-secondary-800 bg-tertiary-100 autofill:bg-red-500 dark:text-white;
+  }
+
+  .btn-primary {
+    @apply bg-primary-500 hover:bg-primary-500/85;
+    @apply text-white;
+    @apply cursor-pointer rounded-4xl py-4;
+    @apply disabled:cursor-not-allowed disabled:opacity-50;
+  }
+}
+
+@layer components {
+  .box {
+    @apply dark:bg-secondary-600 mb-4 h-fit rounded-4xl bg-white p-3 *:transition-colors *:duration-200 *:ease-in-out;
+    @apply space-y-4;
+  }
+}
+
+.chart-container {
+  @apply rounded-2xl p-6 shadow-[var(--chart-shadow)];
+  padding: 20px;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.btn {
+  @apply cursor-pointer rounded-xl bg-blue-600 text-xs text-white max-md:flex-1 max-md:px-2 sm:text-sm md:min-h-11 md:w-44 md:min-w-44 md:text-base;
+}
