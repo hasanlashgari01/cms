@@ -12,7 +12,7 @@ export default function SignInPage() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { isValid, errors },
   } = useForm<SignInModel>({
     resolver: valibotResolver(SignInSchema),
   });
@@ -42,7 +42,7 @@ export default function SignInPage() {
           />
         </div>
 
-        <button type="submit" className="btn-primary mt-6">
+        <button type="submit" className="btn-primary mt-6" disabled={!isValid}>
           ورود
         </button>
       </form>
